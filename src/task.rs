@@ -4,7 +4,7 @@ use chrono::DateTime;
 use chrono::Utc;
 use diesel::prelude::*;
 use diesel_derive_newtype::DieselNewType;
-use serde::Serialize;
+use serde::{Serialize,Deserialize};
 use std::borrow::Cow;
 use std::fmt;
 use std::fmt::Display;
@@ -45,7 +45,7 @@ impl TaskHash {
     }
 }
 
-#[derive(Queryable, Identifiable, Debug, Eq, PartialEq, Clone)]
+#[derive(Queryable, Identifiable, Debug, Eq, PartialEq, Clone, Serialize, Deserialize)]
 #[diesel(table_name = backie_tasks)]
 pub struct Task {
     /// Unique identifier of the task.
