@@ -28,7 +28,7 @@ pub enum TaskState {
 }
 
 #[derive(Clone, Copy, Debug, Ord, PartialOrd, Hash, PartialEq, Eq, DieselNewType, Serialize)]
-pub struct TaskId(Uuid);
+pub struct TaskId(pub Uuid);
 
 impl Display for TaskId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> fmt::Result {
