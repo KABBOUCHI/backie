@@ -115,17 +115,17 @@ impl Task {
 #[derive(Insertable, Debug, Eq, PartialEq, Clone)]
 #[diesel(table_name = backie_tasks)]
 pub struct NewTask {
-    task_name: String,
-    queue_name: String,
-    uniq_hash: Option<TaskHash>,
-    payload: serde_json::Value,
-    timeout_msecs: i64,
-    max_retries: i32,
-    backoff_mode: serde_json::Value,
+    pub task_name: String,
+    pub queue_name: String,
+    pub uniq_hash: Option<TaskHash>,
+    pub payload: serde_json::Value,
+    pub timeout_msecs: i64,
+    pub max_retries: i32,
+    pub backoff_mode: serde_json::Value,
 }
 
 impl NewTask {
-    pub(crate) fn with_timeout<T>(
+    pub fn with_timeout<T>(
         background_task: T,
         timeout: Duration,
     ) -> Result<Self, serde_json::Error>
@@ -146,7 +146,7 @@ impl NewTask {
         })
     }
 
-    pub(crate) fn new<T>(background_task: T) -> Result<Self, serde_json::Error>
+    pub fn new<T>(background_task: T) -> Result<Self, serde_json::Error>
     where
         T: BackgroundTask,
     {
